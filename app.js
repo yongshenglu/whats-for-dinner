@@ -8,11 +8,10 @@ const CATEGORIES = [
   { key: 'hun',    name: '荤菜', emoji: '🍗' },
   { key: 'su',     name: '素菜', emoji: '🥬' },
   { key: 'tang',   name: '汤',   emoji: '🍲' },
-  { key: 'zhushi', name: '主食', emoji: '🍚' },
 ];
 const CAT_MAP = Object.fromEntries(CATEGORIES.map(c => [c.key, c]));
 
-const DEFAULT_COUNTS = { hun: 1, su: 1, tang: 1, zhushi: 0 };
+const DEFAULT_COUNTS = { hun: 1, su: 1, tang: 1 };
 const DEFAULT_NO_REPEAT_DAYS = 7;
 
 const EXAMPLE_DISHES = [
@@ -29,8 +28,6 @@ const EXAMPLE_DISHES = [
   { name: '番茄蛋花汤', category: 'tang',   note: '' },
   { name: '紫菜虾皮汤', category: 'tang',   note: '十分钟搞定' },
   { name: '冬瓜排骨汤', category: 'tang',   note: '' },
-  { name: '米饭',       category: 'zhushi', note: '' },
-  { name: '手擀面',     category: 'zhushi', note: '' },
 ];
 
 /* ================= 状态 ================= */
@@ -58,13 +55,18 @@ function normalizeState(s) {
   if (!s || !Array.isArray(s.dishes) || !Array.isArray(s.history)) return null;
   const settings = s.settings || {};
   const days = Number(settings.noRepeatDays);
+  const counts = {};
+  for (const c of CATEGORIES) {
+    const v = Number((settings.counts || {})[c.key]);
+    counts[c.key] = Number.isFinite(v) ? Math.min(3, Math.max(0, Math.round(v))) : DEFAULT_COUNTS[c.key];
+  }
   return {
     dishes: s.dishes
-      .filter(d => d && d.name)
+      .filter(d => d && d.name && CAT_MAP[d.category])
       .map(d => ({
         id: d.id || uid(),
         name: String(d.name).slice(0, 30),
-        category: CAT_MAP[d.category] ? d.category : 'hun',
+        category: d.category,
         note: String(d.note || '').slice(0, 50),
         createdAt: d.createdAt || Date.now(),
       })),
@@ -72,7 +74,7 @@ function normalizeState(s) {
       .filter(h => h && Array.isArray(h.items))
       .map(h => ({ id: h.id || uid(), date: h.date || new Date().toISOString(), items: h.items })),
     settings: {
-      counts: { ...DEFAULT_COUNTS, ...(settings.counts || {}) },
+      counts: counts,
       noRepeatDays: Number.isFinite(days) ? Math.min(30, Math.max(0, Math.round(days))) : DEFAULT_NO_REPEAT_DAYS,
     },
   };
