@@ -133,7 +133,7 @@ function toItem(d) {
 function pickDishes(catKey, want, eaten) {
   const all = state.dishes.filter(d => d.category === catKey);
   if (all.length === 0) {
-    return { picked: [], note: '还没有录过' + CAT_MAP[catKey].name + '，去「我的菜谱」添加几道吧' };
+    return { picked: [], note: '还没有录过' + CAT_MAP[catKey].name + '，去「菜谱」页添加几道吧' };
   }
   let pool = all.filter(d => !eaten.has(d.id));
   let note = '';
@@ -272,7 +272,7 @@ function renderResult() {
       : '') +
     '<div class="result-actions">' +
       (currentMeal.saved
-        ? '<span class="saved-flag">✓ 已记入「最近吃了什么」</span>'
+        ? '<a class="saved-flag" href="history.html">✓ 已记入「最近吃了什么」 →</a>'
         : '<button class="btn" id="btn-redraw">🔄 重新抽</button>' +
           '<button class="btn btn-primary" id="btn-confirm">✓ 就吃这个</button>') +
     '</div>';
@@ -445,9 +445,9 @@ function hideImportConfirm() {
   $('#import-confirm').classList.add('hidden');
 }
 
-/* ================= 事件绑定 ================= */
+/* ================= 事件绑定（按页面） ================= */
 
-function bindEvents() {
+function bindHomePage() {
   $('#btn-generate').addEventListener('click', () => {
     currentMeal = generateMeal();
     renderResult();
@@ -480,6 +480,9 @@ function bindEvents() {
     saveState();
   });
 
+}
+
+function bindHistoryPage() {
   $('#history-list').addEventListener('click', e => {
     const btn = e.target.closest('.btn-del-hist');
     if (!btn) return;
@@ -488,7 +491,9 @@ function bindEvents() {
     renderHistory();
     toast('已删除这条记录');
   });
+}
 
+function bindDishesPage() {
   // 添加菜
   const form = $('#dish-form');
   const addBtn = $('#btn-add');
@@ -566,7 +571,9 @@ function bindEvents() {
     toast('已保存');
   });
 
-  // 备份
+}
+
+function bindBackupPage() {
   $('#btn-export').addEventListener('click', exportBackup);
   $('#import-file').addEventListener('change', onImportFileChange);
   $('#btn-import-yes').addEventListener('click', () => {
@@ -594,12 +601,23 @@ function bindEvents() {
   });
 }
 
-/* ================= 启动 ================= */
+/* ================= 启动（按页面初始化） ================= */
 
 function init() {
   initState();
-  bindEvents();
-  renderAll();
+  const page = document.body.dataset.page;
+  if (page === 'home') {
+    bindHomePage();
+    renderSettings();
+  } else if (page === 'history') {
+    bindHistoryPage();
+    renderHistory();
+  } else if (page === 'dishes') {
+    bindDishesPage();
+    renderDishList();
+  } else if (page === 'backup') {
+    bindBackupPage();
+  }
 }
 
 init();

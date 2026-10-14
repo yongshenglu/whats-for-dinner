@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="最近吃了什么：点菜记录一清二楚">
+<meta name="theme-color" content="#e8590c">
+<title>最近吃了什么 · 今天吃什么？</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%9A%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="history">
+
+<header class="site-header">
+  <h1>📅 最近吃了什么</h1>
+  <p class="subtitle">吃过什么、什么时候吃的，翻一翻就知道</p>
+</header>
+
+<nav class="tabbar">
+  <a class="tab" href="index.html"><span class="tab-icon">🎲</span><span class="tab-label">点菜</span></a>
+  <a class="tab active" href="history.html" aria-current="page"><span class="tab-icon">📅</span><span class="tab-label">记录</span></a>
+  <a class="tab" href="dishes.html"><span class="tab-icon">📖</span><span class="tab-label">菜谱</span></a>
+  <a class="tab" href="backup.html"><span class="tab-icon">💾</span><span class="tab-label">备份</span></a>
+</nav>
+
+<main>
+
+  <section class="card">
+    <h2>吃饭记录</h2>
+    <ul id="history-list" class="history-list"></ul>
+    <div id="history-empty" class="empty-block hidden">
+      <p class="muted empty-tip">还没有记录，抽一餐点「就吃这个」就有了</p>
+      <a class="btn" href="index.html">🎲 去点一餐</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">数据只存在本设备浏览器里 · 记得偶尔导出备份</footer>
+
+<div id="toast" class="toast" role="status"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

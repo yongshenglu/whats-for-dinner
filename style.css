@@ -194,3 +194,45 @@ h2 { font-size: 1.08rem; margin: 0 0 12px; display: flex; align-items: center; g
   max-width: 86vw; text-align: center;
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---- 底部标签栏（多页面导航）---- */
+.tabbar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+  display: flex; gap: 4px;
+  background: rgba(255, 253, 250, .96);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid var(--border);
+  padding: 6px 10px calc(8px + env(safe-area-inset-bottom));
+}
+.tab {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding: 5px 0 3px; border-radius: 12px;
+  text-decoration: none; color: var(--muted); font-size: .72rem; font-family: inherit;
+}
+.tab-icon { font-size: 1.3rem; line-height: 1.15; }
+.tab.active { color: var(--accent); font-weight: 700; background: var(--accent-soft); }
+
+body { padding-bottom: calc(78px + env(safe-area-inset-bottom)); }
+
+@media (min-width: 640px) {
+  body { padding-bottom: 0; }
+  .tabbar {
+    position: static; max-width: 640px; margin: 2px auto 12px;
+    border: 1px solid var(--border); border-radius: 999px;
+    background: var(--card); box-shadow: var(--shadow);
+    padding: 6px 10px;
+  }
+  .tab { flex-direction: row; gap: 7px; font-size: .92rem; padding: 8px 0; }
+}
+
+/* toast 位置让位给标签栏 */
+.toast { bottom: calc(94px + env(safe-area-inset-bottom)); }
+@media (min-width: 640px) { .toast { bottom: 28px; } }
+
+a.saved-flag { text-decoration: none; }
+
+/* 空状态 */
+.empty-block {
+  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  text-align: center; padding: 26px 0 14px;
+}

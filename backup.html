@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="数据备份：导出导入菜谱和记录">
+<meta name="theme-color" content="#e8590c">
+<title>数据备份 · 今天吃什么？</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%9A%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="backup">
+
+<header class="site-header">
+  <h1>💾 数据备份</h1>
+  <p class="subtitle">换手机、换电脑，数据不丢</p>
+</header>
+
+<nav class="tabbar">
+  <a class="tab" href="index.html"><span class="tab-icon">🎲</span><span class="tab-label">点菜</span></a>
+  <a class="tab" href="history.html"><span class="tab-icon">📅</span><span class="tab-label">记录</span></a>
+  <a class="tab" href="dishes.html"><span class="tab-icon">📖</span><span class="tab-label">菜谱</span></a>
+  <a class="tab active" href="backup.html" aria-current="page"><span class="tab-icon">💾</span><span class="tab-label">备份</span></a>
+</nav>
+
+<main>
+
+  <section class="card">
+    <h2>备份与恢复</h2>
+    <p class="muted backup-tip">菜谱和记录都保存在<b>这台设备的浏览器</b>里。换手机、换电脑时，先「导出备份」，再到新设备「导入备份」。</p>
+    <div class="backup-actions">
+      <button id="btn-export" class="btn">⬇️ 导出备份</button>
+      <label class="btn btn-file" for="import-file">⬆️ 导入备份</label>
+      <input type="file" id="import-file" accept=".json,application/json" hidden>
+    </div>
+    <div id="import-confirm" class="import-confirm hidden">
+      <p id="import-confirm-text"></p>
+      <button id="btn-import-yes" class="btn btn-primary btn-sm">确认覆盖导入</button>
+      <button id="btn-import-no" class="btn btn-ghost btn-sm">取消</button>
+    </div>
+    <button id="btn-reset" class="btn btn-ghost btn-reset">恢复示例菜谱（不清除记录）</button>
+  </section>
+
+</main>
+
+<footer class="site-footer">数据只存在本设备浏览器里 · 记得偶尔导出备份</footer>
+
+<div id="toast" class="toast" role="status"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

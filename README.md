@@ -30,3 +30,14 @@ python -m http.server 8000
 ## 技术说明
 
 纯 HTML + CSS + JavaScript，零依赖，静态部署在 GitHub Pages。
+
+页面结构（四个功能区各一页，底部标签栏切换）：
+
+| 页面 | 功能 |
+|---|---|
+| `index.html` | 🎲 随机点菜 |
+| `history.html` | 📅 最近吃了什么 |
+| `dishes.html` | 📖 我的菜谱（增删改） |
+| `backup.html` | 💾 数据备份（导出 / 导入 / 恢复示例） |
+
+`app.js` / `style.css` 为四页共用的逻辑与样式。

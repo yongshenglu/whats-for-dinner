@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="我的菜谱：会做的菜都在这里管理">
+<meta name="theme-color" content="#e8590c">
+<title>我的菜谱 · 今天吃什么？</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%9A%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-page="dishes">
+
+<header class="site-header">
+  <h1>📖 我的菜谱</h1>
+  <p class="subtitle">会做的菜都录进来，想吃了就随机点</p>
+</header>
+
+<nav class="tabbar">
+  <a class="tab" href="index.html"><span class="tab-icon">🎲</span><span class="tab-label">点菜</span></a>
+  <a class="tab" href="history.html"><span class="tab-icon">📅</span><span class="tab-label">记录</span></a>
+  <a class="tab active" href="dishes.html" aria-current="page"><span class="tab-icon">📖</span><span class="tab-label">菜谱</span></a>
+  <a class="tab" href="backup.html"><span class="tab-icon">💾</span><span class="tab-label">备份</span></a>
+</nav>
+
+<main>
+
+  <section class="card">
+    <h2>菜谱管理 <span id="dish-count" class="muted"></span></h2>
+    <form id="dish-form" class="dish-form">
+      <input name="name" placeholder="菜名，如：红烧肉" maxlength="30" required>
+      <select name="category">
+        <option value="hun">🍗 荤菜</option>
+        <option value="su">🥬 素菜</option>
+        <option value="tang">🍲 汤</option>
+        <option value="zhushi">🍚 主食</option>
+      </select>
+      <input name="note" placeholder="备注（可选）：少辣 / 娃爱吃…" maxlength="50">
+      <button type="submit" class="btn btn-primary" id="btn-add">＋ 添加</button>
+    </form>
+    <div id="dish-list"></div>
+  </section>
+
+</main>
+
+<footer class="site-footer">数据只存在本设备浏览器里 · 记得偶尔导出备份</footer>
+
+<div id="toast" class="toast" role="status"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

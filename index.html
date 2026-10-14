@@ -9,12 +9,19 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%9A%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-page="home">
 
 <header class="site-header">
   <h1>🍚 今天吃什么？</h1>
   <p class="subtitle">会做的菜都在这儿，别纠结，点一下</p>
 </header>
+
+<nav class="tabbar">
+  <a class="tab active" href="index.html" aria-current="page"><span class="tab-icon">🎲</span><span class="tab-label">点菜</span></a>
+  <a class="tab" href="history.html"><span class="tab-icon">📅</span><span class="tab-label">记录</span></a>
+  <a class="tab" href="dishes.html"><span class="tab-icon">📖</span><span class="tab-label">菜谱</span></a>
+  <a class="tab" href="backup.html"><span class="tab-icon">💾</span><span class="tab-label">备份</span></a>
+</nav>
 
 <main>
 
@@ -65,47 +72,6 @@
     <button id="btn-generate" class="btn btn-primary btn-big">🎲 帮我决定</button>
 
     <div id="result" class="result hidden"></div>
-  </section>
-
-  <!-- 吃过记录 -->
-  <section class="card">
-    <h2>📅 最近吃了什么</h2>
-    <ul id="history-list" class="history-list"></ul>
-    <p id="history-empty" class="muted empty-tip">还没有记录，抽一餐点「就吃这个」就有了</p>
-  </section>
-
-  <!-- 菜谱管理 -->
-  <section class="card">
-    <h2>📖 我的菜谱 <span id="dish-count" class="muted"></span></h2>
-    <form id="dish-form" class="dish-form">
-      <input name="name" placeholder="菜名，如：红烧肉" maxlength="30" required>
-      <select name="category">
-        <option value="hun">🍗 荤菜</option>
-        <option value="su">🥬 素菜</option>
-        <option value="tang">🍲 汤</option>
-        <option value="zhushi">🍚 主食</option>
-      </select>
-      <input name="note" placeholder="备注（可选）：少辣 / 娃爱吃…" maxlength="50">
-      <button type="submit" class="btn btn-primary" id="btn-add">＋ 添加</button>
-    </form>
-    <div id="dish-list"></div>
-  </section>
-
-  <!-- 数据备份 -->
-  <section class="card">
-    <h2>💾 数据备份</h2>
-    <p class="muted backup-tip">菜谱和记录都保存在<b>这台设备的浏览器</b>里。换手机、换电脑时，先「导出备份」，再到新设备「导入备份」。</p>
-    <div class="backup-actions">
-      <button id="btn-export" class="btn">⬇️ 导出备份</button>
-      <label class="btn btn-file" for="import-file">⬆️ 导入备份</label>
-      <input type="file" id="import-file" accept=".json,application/json" hidden>
-    </div>
-    <div id="import-confirm" class="import-confirm hidden">
-      <p id="import-confirm-text"></p>
-      <button id="btn-import-yes" class="btn btn-primary btn-sm">确认覆盖导入</button>
-      <button id="btn-import-no" class="btn btn-ghost btn-sm">取消</button>
-    </div>
-    <button id="btn-reset" class="btn btn-ghost btn-reset">恢复示例菜谱（不清除记录）</button>
   </section>
 
 </main>
