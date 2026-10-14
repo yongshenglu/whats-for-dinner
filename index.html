@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="description" content="家庭点菜小工具：把会做的菜录进去，每天随机生成今天吃什么">
+<meta name="theme-color" content="#e8590c">
+<title>今天吃什么？</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8D%9A%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <h1>🍚 今天吃什么？</h1>
+  <p class="subtitle">会做的菜都在这儿，别纠结，点一下</p>
+</header>
+
+<main>
+
+  <!-- 随机点菜 -->
+  <section class="card">
+    <div class="settings">
+      <div class="settings-grid" id="steppers">
+        <div class="stepper" data-cat="hun">
+          <span class="stepper-label">🍗 荤菜</span>
+          <div class="step-ctrl">
+            <button class="step-btn" type="button" data-dir="-1" aria-label="荤菜减一">−</button>
+            <span class="step-num">1</span>
+            <button class="step-btn" type="button" data-dir="1" aria-label="荤菜加一">＋</button>
+          </div>
+        </div>
+        <div class="stepper" data-cat="su">
+          <span class="stepper-label">🥬 素菜</span>
+          <div class="step-ctrl">
+            <button class="step-btn" type="button" data-dir="-1" aria-label="素菜减一">−</button>
+            <span class="step-num">1</span>
+            <button class="step-btn" type="button" data-dir="1" aria-label="素菜加一">＋</button>
+          </div>
+        </div>
+        <div class="stepper" data-cat="tang">
+          <span class="stepper-label">🍲 汤</span>
+          <div class="step-ctrl">
+            <button class="step-btn" type="button" data-dir="-1" aria-label="汤减一">−</button>
+            <span class="step-num">1</span>
+            <button class="step-btn" type="button" data-dir="1" aria-label="汤加一">＋</button>
+          </div>
+        </div>
+        <div class="stepper" data-cat="zhushi">
+          <span class="stepper-label">🍚 主食</span>
+          <div class="step-ctrl">
+            <button class="step-btn" type="button" data-dir="-1" aria-label="主食减一">−</button>
+            <span class="step-num">0</span>
+            <button class="step-btn" type="button" data-dir="1" aria-label="主食加一">＋</button>
+          </div>
+        </div>
+      </div>
+      <div class="days-row">
+        <label for="no-repeat-days">🔁 防重复</label>
+        <input type="number" id="no-repeat-days" min="0" max="30" step="1" value="7">
+        <span>天内吃过的优先不再出现</span>
+      </div>
+    </div>
+
+    <button id="btn-generate" class="btn btn-primary btn-big">🎲 帮我决定</button>
+
+    <div id="result" class="result hidden"></div>
+  </section>
+
+  <!-- 吃过记录 -->
+  <section class="card">
+    <h2>📅 最近吃了什么</h2>
+    <ul id="history-list" class="history-list"></ul>
+    <p id="history-empty" class="muted empty-tip">还没有记录，抽一餐点「就吃这个」就有了</p>
+  </section>
+
+  <!-- 菜谱管理 -->
+  <section class="card">
+    <h2>📖 我的菜谱 <span id="dish-count" class="muted"></span></h2>
+    <form id="dish-form" class="dish-form">
+      <input name="name" placeholder="菜名，如：红烧肉" maxlength="30" required>
+      <select name="category">
+        <option value="hun">🍗 荤菜</option>
+        <option value="su">🥬 素菜</option>
+        <option value="tang">🍲 汤</option>
+        <option value="zhushi">🍚 主食</option>
+      </select>
+      <input name="note" placeholder="备注（可选）：少辣 / 娃爱吃…" maxlength="50">
+      <button type="submit" class="btn btn-primary" id="btn-add">＋ 添加</button>
+    </form>
+    <div id="dish-list"></div>
+  </section>
+
+  <!-- 数据备份 -->
+  <section class="card">
+    <h2>💾 数据备份</h2>
+    <p class="muted backup-tip">菜谱和记录都保存在<b>这台设备的浏览器</b>里。换手机、换电脑时，先「导出备份」，再到新设备「导入备份」。</p>
+    <div class="backup-actions">
+      <button id="btn-export" class="btn">⬇️ 导出备份</button>
+      <label class="btn btn-file" for="import-file">⬆️ 导入备份</label>
+      <input type="file" id="import-file" accept=".json,application/json" hidden>
+    </div>
+    <div id="import-confirm" class="import-confirm hidden">
+      <p id="import-confirm-text"></p>
+      <button id="btn-import-yes" class="btn btn-primary btn-sm">确认覆盖导入</button>
+      <button id="btn-import-no" class="btn btn-ghost btn-sm">取消</button>
+    </div>
+    <button id="btn-reset" class="btn btn-ghost btn-reset">恢复示例菜谱（不清除记录）</button>
+  </section>
+
+</main>
+
+<footer class="site-footer">数据只存在本设备浏览器里 · 记得偶尔导出备份</footer>
+
+<div id="toast" class="toast" role="status"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
