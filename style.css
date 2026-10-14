@@ -158,14 +158,20 @@ h2 { font-size: 1.08rem; margin: 0 0 12px; display: flex; align-items: center; g
 .dish-group { margin-bottom: 10px; }
 .dish-group:last-child { margin-bottom: 0; }
 .group-title { font-size: .95rem; margin: 12px 0 6px; }
-.dish-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.dish-rows { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .dish-row {
-  display: flex; align-items: center; justify-content: space-between; gap: 8px;
-  background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 8px 12px;
+  display: flex; flex-direction: column; gap: 4px; min-width: 0;
+  background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px;
 }
-.dish-info { min-width: 0; display: flex; flex-direction: column; }
-.dish-name-s { font-weight: 600; }
-.dish-ops { display: flex; gap: 4px; flex-shrink: 0; }
+.dish-row.editing { grid-column: 1 / -1; }
+.dish-name-s { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dish-row .dish-note {
+  display: block; max-width: 100%;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.dish-ops { display: flex; gap: 6px; width: 100%; }
+.dish-ops .btn-sm { flex: 1; min-height: 34px; padding: 4px 6px; }
+@media (min-width: 640px) { .dish-ops { max-width: 220px; } }
 
 .edit-form { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; align-items: center; }
 .edit-form input[name="name"] { flex: 2 1 130px; }

@@ -303,10 +303,8 @@ function renderHistory() {
 
 function dishRowHtml(d) {
   return '<li class="dish-row" data-id="' + d.id + '">' +
-    '<div class="dish-info">' +
-      '<span class="dish-name-s">' + esc(d.name) + '</span>' +
-      (d.note ? '<span class="dish-note">' + esc(d.note) + '</span>' : '') +
-    '</div>' +
+    '<span class="dish-name-s" title="' + esc(d.name) + '">' + esc(d.name) + '</span>' +
+    (d.note ? '<span class="dish-note" title="' + esc(d.note) + '">' + esc(d.note) + '</span>' : '') +
     '<div class="dish-ops">' +
       '<button class="btn btn-ghost btn-sm btn-edit" data-id="' + d.id + '">编辑</button>' +
       '<button class="btn btn-ghost btn-sm btn-del" data-id="' + d.id + '">删除</button>' +
@@ -315,6 +313,7 @@ function dishRowHtml(d) {
 }
 
 function renderEditRow(li, d) {
+  li.classList.add('editing');
   li.innerHTML =
     '<form class="edit-form" data-id="' + d.id + '">' +
       '<input name="name" value="' + esc(d.name) + '" maxlength="30" required placeholder="菜名">' +
@@ -547,7 +546,7 @@ function bindDishesPage() {
     }
     const delBtn = e.target.closest('.btn-del');
     if (delBtn) {
-      armButton(delBtn, '再点一次删除', () => {
+      armButton(delBtn, '确认', () => {
         state.dishes = state.dishes.filter(x => x.id !== delBtn.dataset.id);
         saveState();
         renderDishList();
