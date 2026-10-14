@@ -11,7 +11,6 @@
   --hun-c: #c92a2a;    --hun-bg: #fdecec;
   --su-c: #2b8a3e;     --su-bg: #e9f6ec;
   --tang-c: #d9860b;   --tang-bg: #fdf3df;
-  --zhushi-c: #96684a; --zhushi-bg: #f5ece5;
   --radius: 18px;
   --shadow: 0 2px 14px rgba(93, 74, 52, 0.07);
 }
@@ -56,7 +55,7 @@ h2 { font-size: 1.08rem; margin: 0 0 12px; display: flex; align-items: center; g
 /* ---- 搭配设置 ---- */
 .settings { margin-bottom: 14px; }
 .settings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-@media (min-width: 480px) { .settings-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (min-width: 480px) { .settings-grid { grid-template-columns: repeat(3, 1fr); } }
 
 .stepper {
   background: #fff;
@@ -112,7 +111,6 @@ h2 { font-size: 1.08rem; margin: 0 0 12px; display: flex; align-items: center; g
 .dish-card.cat-hun    { border-left-color: var(--hun-c); }
 .dish-card.cat-su     { border-left-color: var(--su-c); }
 .dish-card.cat-tang   { border-left-color: var(--tang-c); }
-.dish-card.cat-zhushi { border-left-color: var(--zhushi-c); }
 @keyframes pop { from { opacity: 0; transform: translateY(10px) scale(.97); } }
 
 .dish-main { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
@@ -122,7 +120,6 @@ h2 { font-size: 1.08rem; margin: 0 0 12px; display: flex; align-items: center; g
 .chip-hun    { color: var(--hun-c);    background: var(--hun-bg); }
 .chip-su     { color: var(--su-c);     background: var(--su-bg); }
 .chip-tang   { color: var(--tang-c);   background: var(--tang-bg); }
-.chip-zhushi { color: var(--zhushi-c); background: var(--zhushi-bg); }
 .btn-swap { flex-shrink: 0; border: 1px dashed var(--border) !important; border-radius: 999px; }
 
 .avoid-line { margin-top: 10px; font-size: .82rem; color: var(--muted); }
